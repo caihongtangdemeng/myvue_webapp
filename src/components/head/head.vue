@@ -36,25 +36,55 @@
       <div class="bg">
         <img src="https://fuss10.elemecdn.com/f/5c/ead54394c3de198d3e6d3e9111bbfpng.png">
       </div>
-      <div class="mask">
+      <transition name="mask">
+      <div class="mask" v-show="showMask">
         <div class="mainWrap">
           <div class="main">
-
+            <h2 class="title">大运村</h2>
+            <div class="starsWrap">
+              <v-stars></v-stars>
+            </div>
+            <v-line class="line">
+              <template>
+                <span class="text">优惠信息</span>
+              </template>
+            </v-line>
+            <v-list></v-list>
+            <v-line class="line">
+              <template>
+                <span class="text">商家公告</span>
+              </template>
+            </v-line>
+            <p class="content">
+              aaaaaaaa
+            </p>
           </div>
         </div>
         <div class="footer">
-          <i class="icon-close"></i>
+          <i class="icon-close" @click="showMask=false"></i>
         </div>
       </div>
+      </transition>
     </div>
 </template>
 
 <script>
 import icon from "components/icon/icon"
+import stars from "components/stars/stars"
+import line from "components/line/line"
+import list from "components/list/list"
 export default {
   name: 'v-head',
+  data(){
+    return{
+      showMask:true
+    }
+  },
   components:{
-    "v-icon":icon
+    "v-icon":icon,
+    "v-stars":stars,
+    "v-line":line,
+    "v-list":list
   }
 }
 </script>
@@ -164,8 +194,61 @@ export default {
           img 
             width 100%
             height 100%
-        
-        
+        .mask
+          position fixed
+          left 0
+          top 0
+          right 0
+          bottom 0
+          z-index 9
+          backdrop-filter blur(7px)
+          background rgba(7,17,27,.8)
+          overflow auto
+          .mainWrap
+            min-height 100%
+            .main
+              @extend .clearfix
+              padding-bottom 96px
+              overflow hidden
+              .title
+                margin-top 64px
+                text-align center
+                line-height 16px
+                font-size 16px
+                font-weight 600
+                color white
+              .starsWrap
+                width 80%
+                margin 0 auto
+                text-align center
+                margin-top 16px
+                margin-bottom 28px
+              .line
+                width 80%
+                margin 0 auto
+                .text
+                  margin 0 12px
+                  font-weight 100px
+                  font-size 14px
+                  color rgba(255,255,255,1)
+              .content
+                margin 0 auto
+                margin-top 24px 
+                box-sizing border-box
+                padding 0 12px
+                width 80%
+                font-size 12px
+                line-height 24px
+                color rgba(255,255,255,1)
+                font-weight 200  
+          .footer
+            margin-top -96px
+            height 96px
+            line-height 96px
+            text-align center
+            font-size 32px
+            color white
+                        
         
         
 </style>
