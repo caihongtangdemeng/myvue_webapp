@@ -1,19 +1,25 @@
 <template>
-  <i class="icon" :class="[`icon-${size}`,type]"></i>
+    <i class="icon" :class="[`icon-${size}`,typeArr[type]]"></i>
 </template>
 
 <script>
-export default {
-  name: 'icon',
-  props:{
-    size:String,
-    type:String
-  }
-}
+    export default {
+        name: "icon",
+        data(){
+          return {
+              typeArr:["decrease","discount","guarantee","invoice","special"]
+          }
+        },
+        props:{
+            size:String,
+            type:Number
+        }
+    }
 </script>
+
 <style scoped lang="stylus" rel="stylesheet/stylus">
-@import "../../common/stylus/mixin.styl"
-   .icon
+    @import "../../common/stylus/mixin.styl"
+    .icon
         display inline-block
         background-size 100%
         background-repeat no-repeat
@@ -69,5 +75,4 @@ export default {
                 bg-image(invoice_4)
             &.special
                 bg-image(special_4)
-
 </style>
