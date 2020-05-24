@@ -4,8 +4,12 @@ import App from './App.vue'
 import router from "@/router/router.js"
 import store from '@/store/store.js'
 import "@/common/stylus/iconmoon.styl"
+import "@/common/stylus/transition.styl"
 
 Vue.config.productionTip = false
+//定义全局组件
+import icon from "components/icon/icom"
+Vue.component("v-icon",icon)
 
 new Vue({
   render: h => h(App),
