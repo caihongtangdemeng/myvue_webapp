@@ -8,7 +8,7 @@ import "@/common/stylus/transition.styl"
 
 Vue.config.productionTip = false
 //定义全局组件
-import icon from "components/icon/icom"
+import icon from "components/icon/icon"
 Vue.component("v-icon",icon)
 
 new Vue({

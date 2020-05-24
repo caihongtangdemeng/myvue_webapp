@@ -2,61 +2,61 @@
   <div class="header">
       <div class="top">
         <div class="avatar">
-          <img src="https://fuss10.elemecdn.com/8/40/02872ce8aefe75c16d3190e75ad61jpeg.jpeg" alt="">
+          <img :src="seller.avatar">
         </div>
         <div class="info">
           <div class="title">
             <i class="brand"></i>
-            <span class="name">粥品香坊（大运村）</span>
+            <span class="name">{{seller.name}}</span>
           </div>
           <div class="desc">
-            <span>蜂鸟专送/38分钟送达</span>
+            <span>{{seller.description}}/{{seller.deliveryTime}}分钟送达</span>
           </div>
-          <div class="support">
-            <v-icon class="icon" size="1" type="decrease"></v-icon>
-            <span class="text">在线支付满28减5，满50减10</span>
+          <div class="support" v-if="seller.supports">
+            <v-icon class="icon" size="1" :type="seller.supports[0].type"></v-icon>
+            <span class="text">{{seller.supports[0].content}}</span>
           </div>
         </div>
-        <div class="btn">
-          <span>5个</span>
+        <div class="btn" @click="showMask=true">
+          <span v-if="seller.supports">{{seller.supports.length}}个</span>
           <i class="icon-keyboard_arrow_right"></i>
         </div>
       </div>
-      <div class="bulletin">
+      <div class="bulletin" @click="showMask=true">
           <div class="icon">
             <i></i>
           </div>
           <p class="text">
-             是以粥为特色的中式营养快餐，自2004年10月18日创立“嘉和一品”品牌至今，不断优化管理，积极创新，立足于“贴近百姓生活，服务千家万户”
+            {{seller.bulletin}}
           </p>
           <div class="arrow">
             <i class="icon-keyboard_arrow_right"></i>
           </div>
       </div>
       <div class="bg">
-        <img src="https://fuss10.elemecdn.com/f/5c/ead54394c3de198d3e6d3e9111bbfpng.png">
+        <img :src="seller.bgImg">
       </div>
       <transition name="mask">
       <div class="mask" v-show="showMask">
         <div class="mainWrap">
           <div class="main">
-            <h2 class="title">大运村</h2>
+            <h2 class="title">{{seller.name}}</h2>
             <div class="starsWrap">
-              <v-stars></v-stars>
+              <v-stars size="48" :score="seller.score" :length="length"></v-stars>
             </div>
             <v-line class="line">
               <template>
                 <span class="text">优惠信息</span>
               </template>
             </v-line>
-            <v-list></v-list>
+            <v-list :supports="seller.supports"></v-list>
             <v-line class="line">
               <template>
                 <span class="text">商家公告</span>
               </template>
             </v-line>
             <p class="content">
-              aaaaaaaa
+              {{seller.bulletin}}
             </p>
           </div>
         </div>
@@ -69,19 +69,21 @@
 </template>
 
 <script>
-import icon from "components/icon/icon"
 import stars from "components/stars/stars"
 import line from "components/line/line"
 import list from "components/list/list"
+import {mapState} from "vuex"
 export default {
   name: 'v-head',
   data(){
     return{
-      showMask:true
+      showMask:false
     }
   },
+  computed:{
+    ...mapState(["seller","length"])
+  },
   components:{
-    "v-icon":icon,
     "v-stars":stars,
     "v-line":line,
     "v-list":list
