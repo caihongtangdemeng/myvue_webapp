@@ -30,6 +30,7 @@
 <script>
 import {mapState,mapActions} from "vuex"
 import {GETGOODS} from "store/mutation_types.js"
+import food from "components/food/food"
 export default {
   name: 'goods',
   computed:{
@@ -40,6 +41,9 @@ export default {
   },
   mounted(){
     this[GETGOODS]()
+  },
+  components:{
+    "v-food":food
   }
 }
 </script>
